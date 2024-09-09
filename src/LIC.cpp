@@ -7,6 +7,11 @@
 #include <cassert>
 #include <cstring>
 #include <limits>
+#include <random>
+
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
 using namespace std;
 
@@ -224,8 +229,8 @@ int initShaders(string vertex_shader, string fragment_shader) {
 int initLIC(int argc, char * argv[]) {
 	// defaults
 	string lic_number_of_steps_input = "80";
-	string vertex_shader = "./src/vertex-shader";
-	string fragment_shader = "./src/fragment-shader";
+	string vertex_shader = "vertex-shader";
+	string fragment_shader = "fragment-shader";
 
 	if (argc > 4) {
 		printf("Usage:\n%s [vertex shader] [fragment shader] [lic number of steps]\n", argv[0]);
@@ -288,7 +293,7 @@ int main(int argc, char **argv) {
 		float *arr = new float[VPD_DEFAULT*VPD_DEFAULT];
 
 		for(int i=0; i<VPD_DEFAULT*VPD_DEFAULT; i++) {
-			arr[i] = drand48();
+			arr[i] = dis(gen);
 		}
 		glTexImage2D(GL_TEXTURE_2D, 0, 1, VPD_DEFAULT, VPD_DEFAULT, 0, GL_LUMINANCE, GL_FLOAT, arr);
 		delete[] arr;

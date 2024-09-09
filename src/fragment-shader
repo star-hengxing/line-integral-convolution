@@ -57,7 +57,7 @@ vec4 lic() {
 	vec2 init_coords = (2.0*coords)-vec2(1.0,1.0); // inital x,y coordinate, shift domain from (0,1) domain to (-1,1)
 	vec2 v; // the vector field's x and y components
 	vec2 step_coords; // current step x,y coordinate
-	vec4 texture_value = 0.0; // color value at the particular texture coordinate vec4/RGBA
+	vec4 texture_value = vec4(0.0); // color value at the particular texture coordinate vec4/RGBA
 	float running_total = 0.0; // running total of grey-scale texture values
 
 	// Start at this fragment's location
